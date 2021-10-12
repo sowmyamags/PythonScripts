@@ -1,0 +1,23 @@
+#!/usr/bin/env python3
+
+import csv
+import re
+import os
+
+errors = {}
+per_user = {}
+
+with open("/mnt/c/users/sowmya/pythonscripts/syslog.txt") as log_file:
+   error_pattern = r"ERROR( [ \w ]* )"
+   info_pattern = r"INFO([ \w ]*)( \[#\d*\] )"
+   for line in log_file:
+      error_msg = re.search(error_pattern, line)
+      if error_msg in line:
+         errors['ERROR:'] = error_msg[1]
+         
+      elif info_msg in line:
+         errors['INFO:'] = info_msg[2] + info_msg[1]
+      print(errors)
+
+
+
